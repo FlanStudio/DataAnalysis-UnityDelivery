@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class FlanCar : MonoBehaviour
 {
     private float lastPosTime = 0f;
 
     private uint currentLap = 0;
-    private float lapStart = 0f;
+    private DateTime lapStart;
     private bool halfLap = false;
 
     private void Awake()
     {
-        lapStart = Time.time;
+        lapStart = DateTime.Now;
 
         //TODO ORI: Send: 
         EventManager.SessionStarted();
@@ -22,12 +24,15 @@ public class FlanCar : MonoBehaviour
     {
         if (Time.time - lastPosTime > 0.1f)
         {
-            lastPosTime = Time.time;
-            //PositionData positionData = new PositionData();
-            float timeStamp = Time.time;
-            Vector3 position = transform.position;
-            Vector3 velocity = GetComponent<Rigidbody>().velocity;
-            Quaternion rotation = transform.rotation;
+            PositionData positionData = new PositionData
+            {
+                position = transform.position,
+                velocity = GetComponent<Rigidbody>().velocity,
+                rotation = transform.rotation,
+                current_lap = currentLap
+            };
+
+            EventManager.OnPositionUpdate(positionData);
         }
 
     }
@@ -56,9 +61,15 @@ public class FlanCar : MonoBehaviour
         if (halfLap)
         {
             halfLap = false;
-            uint id = 0u;
-            float time = Time.time - lapStart;
-            lapStart = Time.time;
+
+            LapData lapData = new LapData
+            {
+                lap_id = currentLap,
+                time = (DateTime.Now - lapStart)
+            };
+            EventManager.OnLap(lapData);
+
+            lapStart = DateTime.Now;
         }
     }
 

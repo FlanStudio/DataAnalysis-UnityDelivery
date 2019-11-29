@@ -8,5 +8,5 @@ public class LapData
     public uint lap_id;
     public string session_id; //This field is autocompleted, do not worry
     public string username = "FlanStudio";
-    public DateTime time = DateTime.Now;
+    public TimeSpan time;
 }
