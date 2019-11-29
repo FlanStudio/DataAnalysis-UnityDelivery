@@ -14,6 +14,11 @@ namespace UnityStandardAssets.Vehicles.Car
         {
             // get the car controller
             m_Car = GetComponent<CarController>();
+
+            //TODO ORI: Send: 
+            //session_id
+            //username
+            //session_start
         }
 
 
@@ -28,6 +33,12 @@ namespace UnityStandardAssets.Vehicles.Car
 #else
             m_Car.Move(h, v, v, 0f);
 #endif
+        }
+
+        private void OnApplicationQuit()
+        {
+            //TODO ORI: Send: 
+            //session Ends
         }
     }
 }

@@ -13,4 +13,18 @@ public class Obstacle : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //TODO ORI: Send: 
+        //playerusername
+        //crash_id
+        //position
+        //current_lap
+        //time
+        //session_id
+        //collision_obj_id
+        int i = 0;
+    }
+
 }
