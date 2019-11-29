@@ -33,6 +33,8 @@ public class FlanCar : MonoBehaviour
             };
 
             EventManager.OnPositionUpdate(positionData);
+
+            lastPosTime = Time.time;
         }
 
     }
