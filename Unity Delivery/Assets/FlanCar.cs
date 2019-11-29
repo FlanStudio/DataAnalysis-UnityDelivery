@@ -17,9 +17,7 @@ public class FlanCar : MonoBehaviour
         lapStart = DateTime.Now;
 
         //TODO ORI: Send: 
-        //session_id
-        //username
-        //session_start
+        EventManager.SessionStarted();
     }
 
     private void Update()
@@ -54,7 +52,7 @@ public class FlanCar : MonoBehaviour
     private void OnApplicationQuit()
     {
         //TODO ORI: Send: 
-        //session Ends
+        EventManager.SessionFinished();
     }
 
     private void CheckLapFinish()
