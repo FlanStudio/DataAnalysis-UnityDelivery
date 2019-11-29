@@ -20,15 +20,7 @@ public class EventManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-
-        Crash crash = new Crash();
-        crash.collision_obj_id = 5;
-        crash.current_lap = 2;
-        crash.position = new Vector3(5, 7, 120);
-        OnCrash(crash);
-
-        SerializeData();
+        Instance = this;     
     }
 
     public static uint GetRandomUUID()
@@ -44,6 +36,7 @@ public class EventManager : MonoBehaviour
     public static void SessionFinished()
     {
         Instance.sessionEndTime = DateTime.Now;
+        SerializeData();
     }
     public static void OnCrash(Crash crash)
     {
@@ -105,7 +98,10 @@ public class EventManager : MonoBehaviour
         if (File.Exists("positions.csv"))
         {
             StreamWriter writer = File.CreateText("crashes.csv");
-            writer.WriteLine(Instance.sessionID.ToString("0000000000") + ";" + Instance.username + ";" + position.position.x + ";" + position.position.y + ";" + position.position.z + ";" + position.velocity.x + ";" + position.velocity.y + ";" + position.velocity.z + ";" + position.rotation.x + ";" + position.rotation.y + ";" + position.rotation.z + ";" + position.rotation.w + ";" + position.current_lap);
+            foreach (PositionData position in Instance.positions)
+            {
+                writer.WriteLine(Instance.sessionID.ToString("0000000000") + ";" + Instance.username + ";" + position.time.ToString("dd/MM/yyyy hh:mm:ss") + ";" + position.position.x + ";" + position.position.y + ";" + position.position.z + ";" + position.velocity.x + ";" + position.velocity.y + ";" + position.velocity.z + ";" + position.rotation.x + ";" + position.rotation.y + ";" + position.rotation.z + ";" + position.rotation.w + ";" + position.current_lap);
+            }
             writer.Close();
         }
         else
@@ -116,7 +112,7 @@ public class EventManager : MonoBehaviour
 
             foreach (PositionData position in Instance.positions)
             {
-                writer.WriteLine(Instance.sessionID.ToString("0000000000") + ";" + Instance.username + ";" + position.position.x + ";" + position.position.y + ";" + position.position.z + ";" + position.velocity.x + ";" + position.velocity.y + ";" + position.velocity.z + ";" + position.rotation.x + ";" + position.rotation.y + ";" + position.rotation.z + ";" + position.rotation.w + ";" + position.current_lap);
+                writer.WriteLine(Instance.sessionID.ToString("0000000000") + ";" + Instance.username + ";" + position.time.ToString("dd/MM/yyyy hh:mm:ss") + ";" + position.position.x + ";" + position.position.y + ";" + position.position.z + ";" + position.velocity.x + ";" + position.velocity.y + ";" + position.velocity.z + ";" + position.rotation.x + ";" + position.rotation.y + ";" + position.rotation.z + ";" + position.rotation.w + ";" + position.current_lap);
             }
             writer.Close();
         }
