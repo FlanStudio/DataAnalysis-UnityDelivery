@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class EventManager : MonoBehaviour
 {
@@ -20,6 +21,14 @@ public class EventManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        Crash crash = new Crash();
+        crash.collision_obj_id = 5;
+        crash.current_lap = 2;
+        crash.position = new Vector3(5, 7, 120);
+        OnCrash(crash);
+
+        SerializeData();
     }
 
     public static uint GetRandomUUID()
@@ -36,7 +45,6 @@ public class EventManager : MonoBehaviour
     {
         Instance.sessionEndTime = DateTime.Now;
     }
-
     public static void OnCrash(Crash crash)
     {
         crash.session_id = Instance.sessionID.ToString();
@@ -56,8 +64,70 @@ public class EventManager : MonoBehaviour
 
     public static void SerializeData()
     {
+        if(File.Exists("sessions.csv"))
+        {
+            StreamWriter writer = File.AppendText("sessions.csv");
+            writer.WriteLine(Instance.sessionID.ToString("0000000000") + ";" + Instance.username + ";" + Instance.sessionStartTime.ToString("dd/MM/yyyy hh:mm:ss") + ";" + Instance.sessionEndTime.ToString("dd/MM/yyyy hh:mm:ss"));
+            writer.Close();
+        }
+        else
+        {
+            StreamWriter writer = File.CreateText("sessions.csv");
+            writer.WriteLine("session_id;username;session_start;session_end");
+            writer.WriteLine(Instance.sessionID.ToString("0000000000") + ";" + Instance.username + ";" + Instance.sessionStartTime.ToString("dd/MM/yyyy hh:mm:ss") + ";" + Instance.sessionEndTime.ToString("dd/MM/yyyy hh:mm:ss"));
+            writer.Close();
+        }
 
+        if(File.Exists("crashes.csv"))
+        {
+            StreamWriter writer = File.AppendText("crashes.csv");
+
+            foreach(Crash crash in Instance.crashes)
+            {
+                writer.WriteLine(Instance.username + ";" + crash.crash_id.ToString("0000000000") + ";" + crash.position.x + ";" + crash.position.y + ";" + crash.position.z + ";" + crash.current_lap + ";" + crash.time.ToString("dd/MM/yyyy hh:mm:ss") + ";" + crash.session_id + ";" + crash.collision_obj_id);
+            }
+
+            writer.Close();
+        }
+        else
+        {
+            StreamWriter writer = File.CreateText("crashes.csv");
+
+            writer.WriteLine("username;crash_id;position_x;position_y;position_z;current_lap;time;session_id;collision_obj_id");
+
+            foreach (Crash crash in Instance.crashes)
+            {
+                writer.WriteLine(Instance.username + ";" + crash.crash_id.ToString("0000000000") + ";" + crash.position.x + ";" + crash.position.y + ";" + crash.position.z + ";" + crash.current_lap + ";" + crash.time.ToString("dd/MM/yyyy hh:mm:ss") + ";" + crash.session_id + ";" + crash.collision_obj_id);
+            }
+            writer.Close();
+        }
+
+        if (File.Exists("positions.csv"))
+        {
+            StreamWriter writer = File.CreateText("crashes.csv");
+            writer.WriteLine(Instance.sessionID.ToString("0000000000") + ";" + Instance.username + ";" + position.position.x + ";" + position.position.y + ";" + position.position.z + ";" + position.velocity.x + ";" + position.velocity.y + ";" + position.velocity.z + ";" + position.rotation.x + ";" + position.rotation.y + ";" + position.rotation.z + ";" + position.rotation.w + ";" + position.current_lap);
+            writer.Close();
+        }
+        else
+        {
+            StreamWriter writer = File.CreateText("positions.csv");
+
+            writer.WriteLine("session_id;username;time;position_x;position_y;position_z;velocity_x;velocity_y;velocity_z;rotation_x;rotation_y;rotation_z;rotation_w;current_lap");
+
+            foreach (PositionData position in Instance.positions)
+            {
+                writer.WriteLine(Instance.sessionID.ToString("0000000000") + ";" + Instance.username + ";" + position.position.x + ";" + position.position.y + ";" + position.position.z + ";" + position.velocity.x + ";" + position.velocity.y + ";" + position.velocity.z + ";" + position.rotation.x + ";" + position.rotation.y + ";" + position.rotation.z + ";" + position.rotation.w + ";" + position.current_lap);
+            }
+            writer.Close();
+        }
+
+        if (File.Exists("laps.csv"))
+        {
+
+        }
+        else
+        {
+
+        }
     }
-
-
 }
