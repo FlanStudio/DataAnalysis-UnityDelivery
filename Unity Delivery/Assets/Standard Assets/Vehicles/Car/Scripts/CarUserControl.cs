@@ -21,6 +21,11 @@ namespace UnityStandardAssets.Vehicles.Car
             m_Car = GetComponent<CarController>();
 
             lapStart = Time.time;
+
+            //TODO ORI: Send: 
+            //session_id
+            //username
+            //session_start
         }
 
         private void Update()
@@ -58,6 +63,12 @@ namespace UnityStandardAssets.Vehicles.Car
             {
                 halfLap = true;
             }
+        }
+
+        private void OnApplicationQuit()
+        {
+            //TODO ORI: Send: 
+            //session Ends
         }
 
         private void CheckLapFinish()
