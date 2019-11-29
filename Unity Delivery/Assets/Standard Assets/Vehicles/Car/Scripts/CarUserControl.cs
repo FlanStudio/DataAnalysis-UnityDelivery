@@ -22,10 +22,10 @@ namespace UnityStandardAssets.Vehicles.Car
 
             lapStart = Time.time;
 
-            //TODO ORI: Send: 
-            //session_id
-            //username
-            //session_start
+            //TODO ORI: Send start session:
+            
+
+
         }
 
         private void Update()
