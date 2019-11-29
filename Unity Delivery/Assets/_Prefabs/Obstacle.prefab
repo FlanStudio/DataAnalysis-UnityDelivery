@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 136905870192562270}
   - component: {fileID: 23888578697057142}
   - component: {fileID: 114360985897890674}
-  - component: {fileID: 7517747460207110220}
   m_Layer: 0
   m_Name: Obstacle
-  m_TagString: Untagged
+  m_TagString: barrel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +51,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1118941244231894}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -107,17 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48373da7f6928fd479933208df544360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &7517747460207110220
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118941244231894}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.6947174
-  m_Height: 2.3609488
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.18047428, z: 0.05506897}
+  barrel_uid: 0

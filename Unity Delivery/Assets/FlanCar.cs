@@ -6,7 +6,7 @@ public class FlanCar : MonoBehaviour
 {
     private float lastPosTime = 0f;
 
-    private int currentLap = 0;
+    private uint currentLap = 0;
     private float lapStart = 0f;
     private bool halfLap = false;
 
@@ -59,6 +59,20 @@ public class FlanCar : MonoBehaviour
             uint id = 0u;
             float time = Time.time - lapStart;
             lapStart = Time.time;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //TODO ORI: SendCrash: 
+        if(collision.gameObject.CompareTag("barrel"))
+        {
+            Crash crash = new Crash();
+            crash.position = collision.gameObject.transform.position;
+            crash.collision_obj_id = collision.gameObject.GetComponent<Obstacle>().barrel_uid;
+            crash.current_lap = currentLap;
+
+            EventManager.OnCrash(crash);
         }
     }
 }
