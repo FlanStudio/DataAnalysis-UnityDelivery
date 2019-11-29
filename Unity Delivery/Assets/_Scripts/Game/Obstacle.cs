@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+    public static uint barrel_counter = 0;
+    public uint barrel_uid = 0;
+
+    // Use this for initialization
+    void Start () 
+    {
+        barrel_uid = barrel_counter;
+        barrel_counter += 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //TODO ORI: Send: 
-        //playerusername
-        //crash_id
-        //position
-        //current_lap
-        //time
-        //session_id
-        //collision_obj_id
-        int i = 0;
-    }
 
 }
