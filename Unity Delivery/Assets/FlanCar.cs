@@ -72,6 +72,7 @@ public class FlanCar : MonoBehaviour
             EventManager.OnLap(lapData);
 
             lapStart = DateTime.Now;
+            currentLap++;
         }
     }
 

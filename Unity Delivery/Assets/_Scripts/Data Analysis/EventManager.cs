@@ -122,7 +122,7 @@ public class EventManager : MonoBehaviour
             StreamWriter writer = File.AppendText("laps.csv");
             foreach (LapData lap in Instance.laps)
             {
-                writer.WriteLine(lap.lap_id.ToString() + ";" + Instance.sessionID.ToString("0000000000") + lap.username + ";" + lap.time.ToString("dd/MM/yyyy hh:mm:ss"));
+                writer.WriteLine(lap.lap_id.ToString() + ";" + Instance.sessionID.ToString("0000000000") + ";" + lap.username + ";" + "00/00/0000 " + lap.time.ToString("hh\\:mm\\:ss"));
             }
             writer.Close();
         }
@@ -134,7 +134,7 @@ public class EventManager : MonoBehaviour
 
             foreach (LapData lap in Instance.laps)
             {
-                writer.WriteLine(lap.lap_id.ToString() + ";" + Instance.sessionID.ToString("0000000000") + lap.username + ";" + lap.time.ToString("dd/MM/yyyy hh:mm:ss"));
+                writer.WriteLine(lap.lap_id.ToString() + ";" + Instance.sessionID.ToString("0000000000") + ";" + lap.username + ";" + "00/00/0000 " + lap.time.ToString("hh\\:mm\\:ss"));
             }
             writer.Close();
         }
