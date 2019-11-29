@@ -97,7 +97,7 @@ public class EventManager : MonoBehaviour
 
         if (File.Exists("positions.csv"))
         {
-            StreamWriter writer = File.CreateText("crashes.csv");
+            StreamWriter writer = File.AppendText("crashes.csv");
             foreach (PositionData position in Instance.positions)
             {
                 writer.WriteLine(Instance.sessionID.ToString("0000000000") + ";" + Instance.username + ";" + position.time.ToString("dd/MM/yyyy hh:mm:ss") + ";" + position.position.x + ";" + position.position.y + ";" + position.position.z + ";" + position.velocity.x + ";" + position.velocity.y + ";" + position.velocity.z + ";" + position.rotation.x + ";" + position.rotation.y + ";" + position.rotation.z + ";" + position.rotation.w + ";" + position.current_lap);
@@ -119,11 +119,24 @@ public class EventManager : MonoBehaviour
 
         if (File.Exists("laps.csv"))
         {
-
+            StreamWriter writer = File.AppendText("laps.csv");
+            foreach (LapData lap in Instance.laps)
+            {
+                writer.WriteLine(lap.lap_id.ToString() + ";" + Instance.sessionID.ToString("0000000000") + lap.username + ";" + lap.time.ToString("dd/MM/yyyy hh:mm:ss"));
+            }
+            writer.Close();
         }
         else
         {
+            StreamWriter writer = File.CreateText("laps.csv");
 
+            writer.WriteLine("lap_id;session_id;username;time");
+
+            foreach (LapData lap in Instance.laps)
+            {
+                writer.WriteLine(lap.lap_id.ToString() + ";" + Instance.sessionID.ToString("0000000000") + lap.username + ";" + lap.time.ToString("dd/MM/yyyy hh:mm:ss"));
+            }
+            writer.Close();
         }
     }
 }
