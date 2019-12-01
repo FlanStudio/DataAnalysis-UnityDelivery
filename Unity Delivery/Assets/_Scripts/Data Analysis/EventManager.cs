@@ -97,7 +97,7 @@ public class EventManager : MonoBehaviour
 
         if (File.Exists("positions.csv"))
         {
-            StreamWriter writer = File.AppendText("crashes.csv");
+            StreamWriter writer = File.AppendText("positions.csv");
             foreach (PositionData position in Instance.positions)
             {
                 writer.WriteLine(Instance.sessionID.ToString("0000000000") + ";" + Instance.username + ";" + position.time.ToString("dd/MM/yyyy hh:mm:ss") + ";" + position.position.x + ";" + position.position.y + ";" + position.position.z + ";" + position.velocity.x + ";" + position.velocity.y + ";" + position.velocity.z + ";" + position.rotation.x + ";" + position.rotation.y + ";" + position.rotation.z + ";" + position.rotation.w + ";" + position.current_lap);
